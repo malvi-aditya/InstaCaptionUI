@@ -23,6 +23,8 @@ export default function JSNotes(props) {
   const [funcProg, setFuncProg] = useState(false);
   const [promise, setPromise] = useState(false);
   const [asynAwait, setAsynAwait] = useState(false);
+  const [thisK, setThisK] = useState(false);
+
   return (
     <div className={classes.content}>
       <ul>
@@ -954,9 +956,268 @@ export default function JSNotes(props) {
               getData().catch(err => console.log(err)); <br />
               Async await is just a <b>syntactic sugar</b> over then and catch,
               behind the scenes it uses then only. improves readability and the
-              flow makes sense, we dont have to deal with callback funcs and all.
+              flow makes sense, we dont have to deal with callback funcs and
+              all.
             </>
           )}
+        </li>
+        <li>
+          <div style={{ display: "flex", gap: "5px" }}>
+            <b>this keyword</b>:
+            <div onClick={() => setThisK((val) => !val)}>
+              {thisK ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </div>
+          </div>
+          {thisK && (
+            <>
+              In global space: "this" will be equal to the global object always
+              in the global space/scope. in browsers the object is Window.{" "}
+              <br />
+              In a function: If it is not strict mode then it is equal to he
+              global object, in strict mode it will be undefined. <br />
+              function x() {"{ console.log(this)}"}; <br />
+              x(); <br />
+              The behaviour is because of a phenomenon known as "this
+              substitution": If the value of "this" keyword is undefined or null
+              then the value of "this" keyword will be replaced with global
+              object only if we are in non strict mode. <br />
+              The value of this keyword also depends on how the function is
+              called: (only strict mode ex now) In the above example, x is
+              called without any reference of an object ( x() ) so value of
+              "this" is undefined. But if x is called as: window.x(); then value
+              of "this" will be the global object, we are referencing it using
+              the window object. <br />
+              Inside an objects method: <br />
+              Method: When we make a function a part of an object it is known as
+              method. Like below, x is a method. (just a lingo, it is a function
+              only)
+              <br />
+              let a = {"{ a: 10, x: function () { console.log(this) } }"};{" "}
+              <br />
+              obj.x(); <br />
+              This will print the object itself, when called like above, this
+              refers to the whole object. Instead of this, if we log this.a,
+              then 10 will be printed. <br />
+              Call, bind, apply: When we have to share methods, like there is
+              func (method) in one object and we need to use it on another
+              object. Ex: <br />
+              <SyntaxHighlighter language="javascript" style={docco}>
+                {`
+              const person1 = {
+                name: "Aditya",
+                printName: function () {
+                  console.log(this.name);
+                }, 
+              }
+              
+              person1.printName(); // prints "Aditya"
+
+              const person2 = {
+                name: "Martin",
+              }
+
+              person2.printName(); // cannot work as person2 does not have the method printName.
+
+              //We use call to use a objects method on another object.
+              person1.printName.call(person2); // prints "Martin"
+            `}
+              </SyntaxHighlighter>
+              Above, the argument person2 which we pass to call becomes the
+              value of "this" in printName, we override the value. <br />
+              If our function accepts some parameters, we can pass them as
+              subsequent arguments after passing the reference object. also we
+              can keep the method outside. Ex:
+              <SyntaxHighlighter language="javascript" style={docco}>
+                {`
+              const person1 = {
+                name: "Aditya", 
+              }
+
+              let printName = function (lastName, city) {
+                console.log(this.name + " " + lastName + " " + city);
+              },
+              
+              printName.call(person1, "Malvi", "ABC"); // prints "Aditya Malvi ABC"
+
+              const person2 = {
+                name: "Martin",
+              }
+
+              printName.call(person2); // prints "Martin undefined undefined" as no args passed 
+            `}
+              </SyntaxHighlighter>
+              Apply: Same as call, only thing different is the way we pass
+              arguments as an array in apply instead of several comma separated
+              args. Ex: printName.call(person1, ["Malvi", "ABC"]);
+              <br />
+              Bind: Bind finds the method (printName) with an object and returns
+              the copy of that method. It does not call the method instead
+              returns a func. Used to bind and keep a copy of that method and
+              use it later instead of invoking it directly like in call and
+              apply. ex: <br />
+              let printCopy = printName.bind(person1, "Malvi", "ABC"); <br />
+              printCopy();
+              <br />
+              Polyfill or bind: If a browser does not support a function then we
+              need to have/implement some fallback func (our own) to use in
+              place of the unsupported func, this is called polyfills. For bind:
+              <SyntaxHighlighter language="javascript" style={docco}>
+                {`
+                  let person1 = {
+                    firstName: "Aditya",
+                    lastName: "Malvi",
+                  }
+
+                  let printName = function (hometown, state) {
+                    console.log(this.firstName + " " + this.lastName + " " + from + " " + hometown + "," + state);
+                  }
+
+                  Function.prototype.myBind (...args) {
+                    let obj = this; // this will be pointing to the printName method
+                    // args passed to myBind handled here
+                    let params = args.slice(1); // remove first arg, get the remaining array
+
+                    //args passed to the returned func (like state here), handled here
+                    return function (...args2) {
+                      obj.apply(args[0], [...params, ...args2]); // same as printName.call(person1)
+                    }
+                  }
+
+                  let printName1 = printName.myBind(person1, "Nashik");
+                  printName1("Maharashtra");
+                `}
+              </SyntaxHighlighter>
+              <br />
+              <b>In arrow functions</b>: this takes the value from its lexical
+              env, arrow functions do not have their own "this" and dont have
+              the concept of "this". In the person1 ex, if we replace printName
+              with: printName: () => {"{ console.log(this) }"}
+              , will not work, instead global object will be printed. below the
+              object will get printed as the arrow function is inside another
+              fun ( its enclosing lexical context ), just behaves like above
+              ex.: <br />
+              <SyntaxHighlighter language="javascript" style={docco}>
+                {`
+              const person1 = {
+                name: "Aditya",
+                printName: function () {
+                  const y = () => {
+                    console.log(this.name)
+                  }
+                  y();
+                }, 
+              }
+              person1.printName();
+            `}
+              </SyntaxHighlighter>
+              this in HTML DOM: it refers to the HTML element we access this. ex
+              if we add this in the HTML script, this has reference to the html
+              button element:
+              {`<button onclick={"alert(this)"}> Click</button>`}
+            </>
+          )}
+        </li>
+        <li>
+          <b>Debouncing</b>: Lets say in our search bar we have auto suggest
+          based on the text typed. When we type, api call is not made for every
+          character we type (every keystroke), instead when take some pause an
+          api call is made with the word typed so far. This delaying is called
+          debouncing. Ex: getData() is called to get auto suggest data. We need
+          to debounce getData, meaning invoking it only when we take a pause.
+          Let say only if there is time span of more than 300ms b/w two key
+          presses then only call getData. We set a timer with a delay (300ms),
+          if 300ms occur b/w two key presses, then we call getData() as
+          setTimeout func will execute after that time. But if it is less than
+          300ms b/w key strokes then we have to clear the timer and reset it.
+          <br />
+          <SyntaxHighlighter language="javascript" style={docco}>
+            {`
+              const getData = () => {...};
+
+              const debounce = function (func, delay) {
+                let timer;
+                return function () {
+                  clearTimeout(timer);
+                  timer = setTimeout(() => {
+                    func();
+                  }, delay);
+                }
+              }
+
+              const debouncedGetData = debounce(getData, 300);
+
+              return (
+                <>
+                  <SearchBar onKeyUp={debouncedGetData}/>
+                </>
+              )
+            `}
+          </SyntaxHighlighter>
+        </li>
+        <li>
+          <b>Throttling</b>: Lets say on clicking a button we make an api call,
+          on continuos clicking of button we should avoid making multiple calls
+          and limit the rate. By throttling, after the first click, we can delay
+          the next call for a certain limit of time, lets say, by 500ms. After a
+          func call happens, the next func call will only happen after delay
+          (ex: 500ms) amount of time, even if there are multiple button clicks
+          occuring. Ex: we have an expensive func which needs to be throttled,
+          called less frequently. We can implement throttle as below. We return
+          a closure having a var flag, if true then we run func and set flag to
+          false and switch back to true only after delay time. We handle args
+          and call func the below way and not directly ( func() ).
+          <SyntaxHighlighter language="javascript" style={docco}>
+            {`
+              const expensiveFunc = () => {...};
+
+              const throttle = function (func, delay) {
+                let flag = true;
+                return function () {
+                  let context = this, args = arguments;
+                  if (flag) {
+                    func.apply(context, args);
+                    flag = false;
+                    setTimeout(() => {
+                      flag = true;
+                    }, delay)
+                  }
+                }
+              }
+
+              const throttledFunc = throttle(expensiveFunc, 500);
+
+            `}
+          </SyntaxHighlighter>
+        </li>
+        <li>
+          <b>Debouncing vs throttling</b>: Both are used to optimise performance
+          by limitng the rate of func calls. Few examples: <br />
+          1. Search bar example: While searching we cannot make api calls for
+          every key press event to fetch auto suggestions. We debounce so the
+          api/func call is made only when there is a certain delay/ time
+          difference b/w the two key press events. Throttling: lets day it makes
+          a call at the beginning and then will make new call only after delay
+          amount of time, any characters typed during that time will be ignored.
+          Debouncing is preferred and makes more sense in this scenario. <br />
+          2. Window Resize: lets say when user resizes the browser window, we
+          want to call a func. We add event listener and attach the callback
+          func. But when we are continuously resizing, huge amount of resize
+          events are triggered which will cause many func calls. By debouncing,
+          we can call func only when time difference b/w 2 resize events is some
+          delay. In throttling, we can call the func after every delay amount of
+          time. Depends on use case which to use from both. <br />
+          3. Button click: If button click happens frequently, (lets say
+          shooting game), triggering several funcs. In debouncing, click handler
+          will be called only when differnce b/w two click events is more than a
+          delay, clicking quickly/frequently will have two events with time diff
+          less than delay so extra func calls avoided. Lets say there two guns,
+          pistol and rifle. If we click and shoot, both guns have different time
+          after which next bullet can be fired and mouse clicks between are
+          redundant. If pistol takes 1s after 1 shot to fire again, we can
+          throttle so that the mouse click event (firing bullet) takes place
+          only after atleast 1s. And rifle can take less time to fire new bullet
+          after firing one so we can reduce the throttle delay. Throttling is
+          more useful in this scenario.
         </li>
       </ul>
     </div>

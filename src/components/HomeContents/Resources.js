@@ -18,8 +18,6 @@ export default function Resources(props) {
       <h4> Do these topics! </h4>
       <div className={classes.gridContainer}>
         <div className={classes.content}>
-          <p>Frontend master Intro to react </p>
-          <p>Frontend master Lighthouse (improving react)</p>
           <p>All React hooks</p>
           <p>Namaste Javascript Season 1, Season 2 </p>
           <p>
@@ -44,15 +42,32 @@ export default function Resources(props) {
             https://www.youtube.com/watch?v=Tnp3yX9Z93Q&ab_channel=SemicolonGuy
           </a>
           <br />
-          <br/>
           <a
             href={
-              "https://www.youtube.com/watch?v=pN6jk0uUrD8&list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP&ab_channel=AkshaySaini"
+              "https://stackoverflow.com/questions/56885037/react-batch-updates-for-multiple-setstate-calls-inside-useeffect-hook"
             }
             target="_blank"
           >
-            https://www.youtube.com/watch?v=pN6jk0uUrD8&list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP&ab_channel=AkshaySaini
+            https://stackoverflow.com/questions/56885037/react-batch-updates-for-multiple-setstate-calls-inside-useeffect-hook
           </a>
+          <br />
+          <a href={"https://javascript.info/ninja-code"} target="_blank">
+            https://javascript.info/ninja-code
+          </a>
+          <br />
+          <a
+            href={
+              "https://www.youtube.com/playlist?list=PL55RiY5tL51rcCnrOrZixuOsZhAHHy6os"
+            }
+            target="_blank"
+          >
+            Webpack Basics: https://javascript.info/ninja-code
+          </a>
+          <br />
+          <a href={"https://google.github.io/styleguide/"} target="_blank">
+            https://google.github.io/styleguide/
+          </a>
+          <br />
         </div>
         <div className={classes.content}>
           <p>
@@ -64,6 +79,10 @@ export default function Resources(props) {
           <p>
             {" "}
             Performance Improvement techniques, freezing or slow ui issues etc.{" "}
+          </p>
+          <p>
+            Event Delegation, react suspense, react.memo, render props, HOCs,
+            performance optimization in virtual DOM, React.lazy, lazy Loading{" "}
           </p>
         </div>
       </div>
