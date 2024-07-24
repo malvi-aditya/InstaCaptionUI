@@ -319,7 +319,7 @@ export default function ReactNotes(props) {
           {"{ name: PropTypes.string, age: PropTypes.number }"})
         </li>
         <li>
-          Render props: sharing code between components using a prop whose value
+          <b>Render props</b>: sharing code between components using a prop whose value
           is a function. This function, known as the "render prop," allows for
           dynamic rendering and gives you control over what to render inside a
           component. <br />
@@ -369,7 +369,7 @@ export default function ReactNotes(props) {
           </SyntaxHighlighter>
         </li>
         <li>
-          React suspense: lets you handle asynchronous operations like data
+          <b>React suspense</b>: lets you handle asynchronous operations like data
           fetching or code splitting more gracefully. It allows components to
           "wait" for something before they are rendered. While it's a powerful
           feature, it's still under active development for some use cases,
@@ -413,6 +413,58 @@ export default function ReactNotes(props) {
           are needed to handle errors in Suspense components. 3. Library
           Support: Full benefits often require libraries that are designed to
           work with Suspense.
+        </li>
+        <li>
+          <b> React.Memo</b>: memo lets you skip re-rendering a component when
+          its props are unchanged. React.memo is a higher-order component in
+          React that optimizes the rendering performance of function components
+          by memoizing their output. Essentially, it prevents a component from
+          re-rendering if its props have not changed. This can be particularly
+          useful for performance optimization in large React applications where
+          unnecessary re-renders can affect performance. <br />
+          Key Concepts: <br />
+          1. Memoization: React.memo caches the rendered output of a component
+          and skips rendering when the props remain the same. <br />
+          2. Pure Component for Function Components: It is similar to
+          React.PureComponent but for function components.
+          <br />
+          To use React.memo, wrap your function component with it when exporting
+          the component:
+          <SyntaxHighlighter language="javascript" style={docco}>
+            {`
+              import React from 'react';
+
+              const MyComponent = (props) => {
+                console.log('Rendering MyComponent');
+                return <div>{props.name}</div>;
+              };
+              
+              export default React.memo(MyComponent);              
+            `}
+          </SyntaxHighlighter>
+          Explanation Component: 1. Memoization: React.memo caches the
+          component’s rendered output based on its props. If the props do not
+          change, React skips rendering the component and uses the cached
+          output. 2. Shallow Comparison: By default, React.memo performs a
+          shallow comparison of the component’s props to determine if the
+          component should re-render. <br />
+          Caveats: 1. Frequent Prop Changes: If the props change frequently, the
+          overhead of the memoization may outweigh the benefits. 2. Complex
+          Comparison: Shallow comparison works for simple props. For deeply
+          nested objects, consider using a custom comparison function. 3.
+          Development vs. Production: Ensure performance gains in a production
+          environment. In development, additional checks might not reflect the
+          true performance benefits. <br />
+          When to Use React.memo: 1. Pure Functional Components: Components that
+          render the same output given the same props. 2. Performance
+          Optimization: To prevent unnecessary re-renders and improve
+          performance. 3. Static Content: For components that primarily display
+          static content or rely on props that change infrequently.
+          <br />
+          Also see how to pass custom comparision function for props. <br />
+          <b>Pure Functional components: </b> functions/components that render
+          the same output when given the same props, same props but different
+          outputs not possible.
         </li>
         <li>
           <div style={{ display: "flex", gap: "5px" }}>

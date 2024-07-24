@@ -1219,6 +1219,54 @@ export default function JSNotes(props) {
           after firing one so we can reduce the throttle delay. Throttling is
           more useful in this scenario.
         </li>
+        <li>
+          <b>Event delegation</b>: technique in JavaScript where you use a single event
+          listener to manage events for multiple elements, instead of attaching
+          separate event listeners to each element. This is achieved by taking
+          advantage of the event bubbling mechanism.
+          <br />
+          Event Bubbling: When an event is triggered on an element, it first
+          runs the event handlers on that element, then on its parent, and so
+          on, all the way up to the document object. This is known as event
+          bubbling. <br />
+          How Event Delegation Works: By placing a single event listener on a
+          common ancestor of the elements you are interested in, you can catch
+          events from all of the target elements that bubble up to that
+          ancestor. This approach is efficient and can greatly simplify your
+          code. <br />
+          Ex: Suppose you have a list of items, and you want to handle click
+          events on each item. Instead of attaching a click event listener to
+          each item, you can attach a single event listener to the parent
+          element.
+          <SyntaxHighlighter language="javascript" style={docco}>
+            {`
+              document.getElementById('parent').addEventListener('click', function(event) {
+                if (event.target && event.target.matches('li.child')) {
+                  console.log('Item clicked:', event.target.textContent);
+                }
+              });
+
+              <ul id="parent">
+                <li class="child">Item 1</li>
+                <li class="child">Item 2</li>
+                <li class="child">Item 3</li>
+                <li class="child">Item 4</li>
+              </ul>
+            `}
+          </SyntaxHighlighter>
+          Advantages of Event Delegation Performance: 1. Fewer event listeners
+          result in lower memory consumption and better performance, especially
+          when dealing with a large number of elements. 2. Simpler Code: You
+          only need to add and remove one event listener, making your code
+          cleaner and easier to maintain. 3. Dynamic Content: Event delegation
+          works well with dynamically added elements, as the parent element’s
+          event listener can handle events from new children without additional
+          code.
+          <br />
+          Use Cases: 1. Handling click events on list items. 2. Managing form
+          validation on multiple input fields. 3. Implementing drag-and-drop
+          interfaces. 4. Capturing events from dynamically generated content.
+        </li>
       </ul>
     </div>
   );

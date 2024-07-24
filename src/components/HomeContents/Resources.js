@@ -73,7 +73,7 @@ export default function Resources(props) {
           <p>
             {" "}
             React Routers working etc. , Virtual DOM, Event Listeners
-            everything.{" "}
+            everything, Polyfills (setTimeout etc.){" "}
           </p>
           <p> Design architecture of ui, apis and the flow of everything. </p>
           <p>
