@@ -52,7 +52,7 @@ export default function ReactNotes(props) {
               to recompute/call the slow func. This way we run the slow func
               only we need to and not every time. Over usage is also not good,
               we increase a useMemo func call with every useMemo and also more
-              meomory is consumed to cahce/store. <br />
+              memory is consumed to cache/store. <br />
               <b>Imp.</b> If two objects are same meaning having the same
               values, they are still diffeent as they refer to diff objects. So
               if we have declared an object in a variable and add it as a
@@ -319,10 +319,10 @@ export default function ReactNotes(props) {
           {"{ name: PropTypes.string, age: PropTypes.number }"})
         </li>
         <li>
-          <b>Render props</b>: sharing code between components using a prop whose value
-          is a function. This function, known as the "render prop," allows for
-          dynamic rendering and gives you control over what to render inside a
-          component. <br />
+          <b>Render props</b>: sharing code between components using a prop
+          whose value is a function. This function, known as the "render prop,"
+          allows for dynamic rendering and gives you control over what to render
+          inside a component. <br />
           1. Function as a Child Component: The most common implementation of
           render props involves passing a function as a child to a component.
           This function receives props and returns React elements. <br />
@@ -369,11 +369,11 @@ export default function ReactNotes(props) {
           </SyntaxHighlighter>
         </li>
         <li>
-          <b>React suspense</b>: lets you handle asynchronous operations like data
-          fetching or code splitting more gracefully. It allows components to
-          "wait" for something before they are rendered. While it's a powerful
-          feature, it's still under active development for some use cases,
-          particularly for data fetching. <br />
+          <b>React suspense</b>: lets you handle asynchronous operations like
+          data fetching or code splitting more gracefully. It allows components
+          to "wait" for something before they are rendered. While it's a
+          powerful feature, it's still under active development for some use
+          cases, particularly for data fetching. <br />
           Key Concepts of React Suspense: <br />
           1. Suspense Component: It acts as a boundary that "suspends" rendering
           of components until the asynchronous operations inside it are
@@ -550,6 +550,39 @@ export default function ReactNotes(props) {
               </li>
             </ul>
           )}
+        </li>
+        <li>
+          Critical Rendering Path (CRP) : A sequence of few steps/rules that
+          tells how the browser renders our code. <br />
+          1. DOM Tree: browser will first load the main html file and make the
+          dom tree. (Check all types of this files in the network tab: all
+          types)
+          <br />
+          2. Load css: then the css is loaded and the css tree is built. CSS is
+          render blocking meaning only after all css files are loaded/imported
+          in browser then only rendering will start otherwise rendering is
+          blocked, if there are multiple css files only when all files are
+          loaded rendering begins. CSS tree (CSSOM - CSS object model) will only
+          have all those nodes/elements that have some styles applied to it.{" "}
+          <br />
+          script tag: this is parser blocking meaning rendering will continue to
+          happen on browser when multiple script tags encountered and being
+          loaded one by one. Paser blocking means unless one file is not loaded
+          it wont go on the next line. But modern browsers parallely loads all
+          the files and not sequentially. <br />
+          3. Render tree: This tree will have all the nodes that have to be
+          rendered or shown on the browser. Basically merging dom tree and css
+          tree is the render tree.
+          <br />
+          4. Layout: Taking the render tree and display it on the browser by
+          computing /calculating different things. like if there some font size
+          then calculate some width/position/ space taken to display on the
+          browser. On resizing the browser window, layout phase is triggered
+          again to recompute new values for displaying in the new resized
+          window. Paint phase is also triggered again and this is called
+          <b>reflow</b>.<br />
+          5. Paint: Take the layout and the render tree to render the content.
+          Basically paint (show) the render tree on the browser.
         </li>
       </ul>
     </>
