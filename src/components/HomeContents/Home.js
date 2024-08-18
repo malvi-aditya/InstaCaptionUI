@@ -6,7 +6,8 @@ import Box from "@mui/material/Box";
 import Resources from "./Resources";
 import Calculator from "./Calculator/Calculator";
 import Notes from "./Notes/Notes";
-import Experimenting from './Experimenting'
+import Experimenting from './Experimenting';
+import ReactCourse from './ReactCourse/ReactCourse';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -36,6 +37,10 @@ const tabConfig = [
   {
     id: 3,
     name: "Experimenting",
+  },
+  {
+    id: 4,
+    name: "React Course",
   },
 ];
 
@@ -79,8 +84,10 @@ export default function Home(props) {
           <Calculator />
         ) : tab === 2 ? (
           <Notes />
-        ): (
+        ) : tab === 3 ? (
           <Experimenting />
+        ) : (
+          <ReactCourse />
         )}
       </div>
     </div>
