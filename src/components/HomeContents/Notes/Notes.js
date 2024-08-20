@@ -5,6 +5,7 @@ import ReactNotes from "./ReactNotes";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import CSSNotes from "./CSSNotes";
+import GitNotes from './GitNotes';
 
 const useStyles = makeStyles(() => ({
   listItem: {
@@ -18,6 +19,7 @@ export default function Notes(props) {
   const [js, setJS] = useState(false);
   const [react, setReact] = useState(false);
   const [css, setCSS] = useState(false);
+  const [git, setGit] = useState(false);
   return (
     <>
       <>
@@ -42,6 +44,13 @@ export default function Notes(props) {
           </div>
         </div>
         {css && <CSSNotes />}
+        <div className={classes.listItem}>
+          <b>Git:</b>
+          <div onClick={() => setGit((val) => !val)}>
+            {git ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </div>
+        </div>
+        {git && <GitNotes />}
         <br />
         <b>CORS:</b> <br />
         Cross origin resource sharing, This is a mechanism which uses additional

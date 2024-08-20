@@ -1,5 +1,6 @@
 import React from 'react';
-import Ep1 from './Ep1';
+import Ep1and2 from './Ep1and2';
+
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
@@ -13,7 +14,8 @@ export default function ReactCourse() {
   const classes = useStyles();
   return (
     <div class={classes.root}>
-      <Ep1 />
+      <Ep1and2 />
+      {/* <Ep3and4 /> */}
     </div>
   )
 }
