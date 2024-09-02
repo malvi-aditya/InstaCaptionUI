@@ -8,7 +8,7 @@ export default function Ep1and2() {
         <ul>
           <li>
             Vscode: type html:5 and hit enter to get the basic html code
-            skeleton in an html file.{" "}
+            skeleton in an html file. For react component skeleton, type rafce.
           </li>
           <li>
             const heading = document.createElement("h1"); heading.innerHTML =
