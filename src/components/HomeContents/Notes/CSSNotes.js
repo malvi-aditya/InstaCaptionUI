@@ -94,7 +94,7 @@ export default function CSSNotes() {
       Use repeat() to specify things by one func instead of writing them again
       and again ex: instead of grid-template-columns: 100px 100px 100px 100px
       write grid-template-columns: repeat(4, 100px). <br />
-      2. grid-template-rows: similar to above, define te rows. <br />
+      2. grid-template-rows: similar to above, define the rows. <br />
       3. grid-auto-rows: when width of any row is not defined, we can have a
       default width. grid-auto-rows: 150px. if we define any row it will
       override this default width. ex: grid-auto-rows: 150px;

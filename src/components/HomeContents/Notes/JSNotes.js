@@ -432,7 +432,7 @@ export default function JSNotes(props) {
           funcs. When we encounter a fetch, api call is made to passed url and
           the callback func to be executed after promise is resolved is
           registered in the browser. when data is received from server, the
-          callback func is not pushed in the queue umlike other callback funcs.
+          callback func is not pushed in the queue unlike other callback funcs.
           Here <b>Microtask queue</b> comes in, similar to callback queue but
           has higher priority. In case of fetch, the callback func will be
           pushed in the microtask queue and event loop picks it to be executed
@@ -736,7 +736,7 @@ export default function JSNotes(props) {
               console.log(err.message)).then(data => return showSummary(data))
               <br /> <br />
               Create a promise: we call the Promise() constructor which takes a
-              function and provides to functions resolve & reject given by
+              function and provides two functions resolve & reject given by
               Promise api/object to build promises. when a promise is resolved
               we handle it with the callback func passed to then, else when
               promise is rejected (reject()), we handle it passing callback
@@ -1195,7 +1195,7 @@ export default function JSNotes(props) {
           1. Search bar example: While searching we cannot make api calls for
           every key press event to fetch auto suggestions. We debounce so the
           api/func call is made only when there is a certain delay/ time
-          difference b/w the two key press events. Throttling: lets day it makes
+          difference b/w the two key press events. Throttling: lets say it makes
           a call at the beginning and then will make new call only after delay
           amount of time, any characters typed during that time will be ignored.
           Debouncing is preferred and makes more sense in this scenario. <br />
@@ -1220,10 +1220,10 @@ export default function JSNotes(props) {
           more useful in this scenario.
         </li>
         <li>
-          <b>Event delegation</b>: technique in JavaScript where you use a single event
-          listener to manage events for multiple elements, instead of attaching
-          separate event listeners to each element. This is achieved by taking
-          advantage of the event bubbling mechanism.
+          <b>Event delegation</b>: technique in JavaScript where you use a
+          single event listener to manage events for multiple elements, instead
+          of attaching separate event listeners to each element. This is
+          achieved by taking advantage of the event bubbling mechanism.
           <br />
           Event Bubbling: When an event is triggered on an element, it first
           runs the event handlers on that element, then on its parent, and so

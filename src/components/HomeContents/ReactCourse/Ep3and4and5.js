@@ -6,7 +6,7 @@ export default function Ep3and4and5() {
       <h6>Episode 3:</h6>
       <ul>
         <li>
-          Creating npm scripts: In the scripts key in package.json we can
+          Creating npm scripts: In the scripts key in package.json we can add
           scripts that we want to run, add a key value pair with the key being
           the name of script and value being the command. Ex start script:
           "start": "parcel index.html", this will 'npx parcel index.html'.
@@ -20,7 +20,7 @@ export default function Ep3and4and5() {
           React element (created by React.createElement) is a object with some
           properties and not same as html element/node, when we render this
           element on the DOM then it becomes an html element. This way of
-          creting is not developer friendly, easy, clumsy etc. <b>JSX</b> was
+          creating is not developer friendly, easy, clumsy etc. <b>JSX</b> was
           introduced to solve this issue, easier js syntax to write html with
           js. JSX and react are very different/separate, we can write react
           without jsx but it becomes very difficult to build large apps. old way
@@ -52,7 +52,7 @@ export default function Ep3and4and5() {
           Babel: Parcel/ webpack are just package managers, the{" "}
           <b>transpilation</b> of JSX is done by <b>Babel</b>. It converts jsx
           into code the react/js can understand. The JSX we have is converted to
-          React.createElement and further flow is samw, behind the scenes JSX is
+          React.createElement and further flow is same, behind the scenes JSX is
           converted to core react createElement only. (Try logging jsx code the
           above line, it is the same object we get from createElement).
           <br />
@@ -87,7 +87,7 @@ export default function Ep3and4and5() {
           Lets say we fetch some data from api and the received data is executed
           in some jsx. Then some malicious data/code is prone to run on our
           browser, this is known as <b>cross site scripting</b>. As it can run
-          on brwser it can access localStorage, cookies etc.
+          on browser it can access localStorage, cookies etc.
           <br />
           const data = fetch(); --data is malicious <br />
           {`<> {data} ...render`} --somewhere data used where js executes.{" "}
@@ -141,7 +141,7 @@ export default function Ep3and4and5() {
           list items/cards as react does not know which item is new. But when we
           pass a key, react knows which is the new id so other cards wont re
           render and only the new card is rendered. Never use/not recommended
-          index (2nd param of map) as key, as the order of itens might change
+          index (2nd param of map) as key, as the order of items might change
           hence ids can change.
         </li>
       </ul>
@@ -203,7 +203,7 @@ export default function Ep3and4and5() {
           previous one and the updated one. Once the difference calculated then
           actual updates to DOM done. Finding out diff b/w two html element tree
           is tough but diff b/w two objects (react elements) is fast. This
-          efficient Dom manipulation makes react faster. 
+          efficient Dom manipulation makes react faster.
         </li>
       </ul>
     </div>
