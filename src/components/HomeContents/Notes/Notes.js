@@ -6,6 +6,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import CSSNotes from "./CSSNotes";
 import GitNotes from './GitNotes';
+import InterviewNotes from './InterviewNotes';
 
 const useStyles = makeStyles(() => ({
   listItem: {
@@ -20,11 +21,13 @@ export default function Notes(props) {
   const [react, setReact] = useState(false);
   const [css, setCSS] = useState(false);
   const [git, setGit] = useState(false);
+  const [interview, setInterview] = useState(false);
+
   return (
     <>
       <>
         <div className={classes.listItem}>
-          <b>JavaScript:</b>
+          <b>JavaScript :</b>
           <div onClick={() => setJS((val) => !val)}>
             {js ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </div>
@@ -51,6 +54,13 @@ export default function Notes(props) {
           </div>
         </div>
         {git && <GitNotes />}
+        <div className={classes.listItem}>
+          <b>Resume, Interview etc:</b>
+          <div onClick={() => setInterview((val) => !val)}>
+            {interview ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </div>
+        </div>
+        {interview && <InterviewNotes />}
         <br />
         <b>CORS:</b> <br />
         Cross origin resource sharing, This is a mechanism which uses additional
